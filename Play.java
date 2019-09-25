@@ -2,23 +2,12 @@ import java.util.Scanner;
 import java.util.Random;
 
 class Play {
-    static int[] cards = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     
     public static int takeCard() {
         int min = 1;
         int max = 10;
         int card = (int) (Math.random() * ((max - min) + 1)) + min;
         return card;
-    }
-
-    public static boolean choice(boolean oui, boolean non) {
-        oui = true;
-        non = false;
-        if (oui) {
-            return true;
-        } else {
-            return false;
-        }
     }
     
     public static void main (String[] args) {
@@ -49,6 +38,7 @@ class Play {
         String messageDealer = messageCardDealer + cardDealer + ", " + messageScoreDealer + scoreDealer;
         System.out.println(messageDealer);
 
+        //Boucle
         boolean continuer = true;
         while ((continuer == true) && (score < 21)) {
             System.out.println("Voulez-vous continuer ?");
@@ -61,14 +51,34 @@ class Play {
                 } else {
                     continuer = false;
                     System.out.println("Au tour de Michel");
-                    }     
+                    }
+
+            //Condition As
+            if ((card == 1) || (card2 == 1)) {
+                System.out.println("Voulez-vous que votre As vale 1 ou 11?");
+                choicePlayer = choice.nextLine();
+                if (choicePlayer.equals("1")) {
+                    score = (score + 1) - 1;
+                    message2 = messageCarte + card2 + ", " + messageScore + score;
+                    System.out.println(message2);
+                }
+                if (choicePlayer.equals("11")) {
+                    score = (score + 11) - 1;
+                    message2 = messageCarte + card2 + ", " + messageScore + score;
+                    System.out.println(message2);
+                } 
+            }
+                     
         }
+
         if (score > 21) {
             System.out.println("Vous avez perdu !");
+            System.exit(0);
         }
         if (score == 21) {
             continuer = false;
             System.out.println("Vous avez gagné !");
+            System.exit(0);
         }
                     
         while (scoreDealer <= 16) {
@@ -79,24 +89,21 @@ class Play {
             
         }
 
-        if (score > scoreDealer) {
+        if ((score > scoreDealer) && (scoreDealer < 21) && (score < 21)) {
             System.out.println("Vous avez gagné !");
-        } else {
+            System.exit(0);
+        } else if ((score < scoreDealer) && (scoreDealer < 21) && (score < 21)) {
             System.out.println("Vous avez perdu !");
+            System.exit(0);
             }
         
         if (scoreDealer > 21) {
             System.out.println("Vous avez gagné !");
+            System.exit(0);
         }
         if (score == scoreDealer) {
             System.out.println("Ex-aequo !");
+            System.exit(0);
         }
     }
 }
-
-
-
-
-
-// //As 1 ou 11 au choix du joueur
-
