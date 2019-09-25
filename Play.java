@@ -14,6 +14,7 @@ class Play {
         int card = takeCard();
         int score = 0;
         Scanner choice = new Scanner(System.in);
+        Scanner as = new Scanner(System.in);
 
         //Partie joueur
 
@@ -53,24 +54,39 @@ class Play {
                     System.out.println("Au tour de Michel");
                     }
 
-            //Condition As
-            if ((card == 1) || (card2 == 1)) {
+            
+                     
+        }
+        //Condition As
+            if (card == 1) {
                 System.out.println("Voulez-vous que votre As vale 1 ou 11?");
-                choicePlayer = choice.nextLine();
-                if (choicePlayer.equals("1")) {
+                String choiceAs = as.nextLine();
+                if (choiceAs == "1") {
                     score = (score + 1) - 1;
                     message2 = messageCarte + card2 + ", " + messageScore + score;
                     System.out.println(message2);
                 }
-                if (choicePlayer.equals("11")) {
+                if (choiceAs == "11") {
                     score = (score + 11) - 1;
                     message2 = messageCarte + card2 + ", " + messageScore + score;
                     System.out.println(message2);
                 } 
             }
-                     
-        }
+            if (card2 == 1) {
+                System.out.println("Voulez-vous que votre As vale 1 ou 11?");
+                String choiceAs = as.nextLine();
+                if (choiceAs == "1") {
+                    score = (score + 1) - 1;
+                    message2 = messageCarte + card2 + ", " + messageScore + score;
+                    System.out.println(message2);
+                }
+                if (choiceAs == "11") {
+                    score = (score + 11) - 1;
+                    message2 = messageCarte + card2 + ", " + messageScore + score;
+                    System.out.println(message2);
+                } 
 
+            }
         if (score > 21) {
             System.out.println("Vous avez perdu !");
             System.exit(0);
