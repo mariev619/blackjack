@@ -10,7 +10,7 @@ class Play {
     public static void menu() {
         System.out.println("Voulez-vous jouer ou quitter ?");
         Scanner choice = new Scanner(System.in);
-        String choicePlay = choice.nextLine();
+        String choicePlay = choice.next();
         if (choicePlay.equals("jouer")) {
             jouer(choice);
         }
@@ -22,24 +22,14 @@ class Play {
     }
 
     public static void jouer(Scanner choice) {
-        int card = takeCard();
-        int score = 0;
         //Partie joueur
+        int card = takeCardPlayer(choice);
+        int score = 0;
         score = score + card;
         System.out.println("Votre première carte est " + card + " et votre score est de " + score);
-        int card2 = takeCard();
+        int card2 = takeCardPlayer(choice);
         score = score + card2;
         System.out.println("Votre deuxième carte est " + card2 + " et votre score est de " + score);
-        if (card == 1) {
-            int newValue = choiceAce(choice);
-            score = (score + newValue) - 1;
-            System.out.println("Votre nouveau score est de " + score);
-        }
-        if (card2 == 1) {
-            int newValue = choiceAce(choice);
-            score = (score + newValue) - 1;
-            System.out.println("Votre nouveau score est de " + score);
-        }
         //Partie dealer
         int scoreDealer = 0;
         int cardDealer = takeCard();
@@ -47,13 +37,13 @@ class Play {
         System.out.println("La première carte de Michel est " + cardDealer + " et son score est de " + scoreDealer + ". Sa deuxième carte est cachée.");
         //Boucle
         boolean continuer = true;
-        while ((continuer == true) && (score < 21)) {
+        while ((continuer) && (score < 21)) {
             System.out.println("Voulez-vous continuer ?");
-            String choicePlayer = choice.nextLine();
+            String choicePlayer = choice.next();
             if (choicePlayer.equals("oui")) {
-                card2 = takeCard();
-                score = score + card2;
-                System.out.println("Votre nouvelle carte est " + card2 + " et votre score est de " + score);
+                card = takeCardPlayer(choice);
+                score = score + card;
+                System.out.println("Votre nouvelle carte est " + card + " et votre score est de " + score);
             } else {
                 continuer = false;
                 System.out.println("Au tour de Michel :");
@@ -106,6 +96,17 @@ class Play {
         }
     }
 
+
+    public static int takeCardPlayer(Scanner choice) {
+        int min = 1;
+        int max = 10;
+        int card = (int) (Math.random() * ((max - min) + 1)) + min;
+        if (card == 1) {
+            card = choiceAce(choice);
+        }
+        return card;
+    }
+
     public static int takeCard() {
         int min = 1;
         int max = 10;
@@ -114,7 +115,7 @@ class Play {
     }
 
     public static int choiceAce(Scanner choice) {
-        System.out.println("Une de vos cartes est un As, voulez-vous qu'elle vale 1 ou 11 ?");
+        System.out.println("Une de vos cartes est un As, vaut-elle 1 ou 11 ?");
         int choiceAce = choice.nextInt();
         if (choiceAce == 1) {
             return 1;
@@ -123,7 +124,6 @@ class Play {
             return 11;
         }
         System.out.println("Valeur incorrecte. Veuillez réessayer");
-        choiceAce(choice);
-        return 0;
+        return choiceAce(choice);
     }
 }
