@@ -26,15 +26,15 @@ class Play {
         int card = takeCardPlayer(choice);
         int score = 0;
         score = score + card;
-        System.out.println("Votre première carte est " + card + " et votre score est de " + score);
+        System.out.println("Votre première carte est un " + card);
         int card2 = takeCardPlayer(choice);
         score = score + card2;
-        System.out.println("Votre deuxième carte est " + card2 + " et votre score est de " + score);
+        System.out.println("Votre deuxième carte est un " + card2 + " et votre score est de " + score);
         //Partie dealer
         int scoreDealer = 0;
         int cardDealer = takeCard();
         scoreDealer = scoreDealer + cardDealer;
-        System.out.println("La première carte de Michel est " + cardDealer + " et son score est de " + scoreDealer + ". Sa deuxième carte est cachée.");
+        System.out.println("La première carte de Michel est un " + cardDealer + " et son score est de " + scoreDealer + ". Sa deuxième carte est cachée.");
         //Boucle
         boolean continuer = true;
         while ((continuer) && (score < 21)) {
@@ -44,9 +44,11 @@ class Play {
                 card = takeCardPlayer(choice);
                 score = score + card;
                 System.out.println("Votre nouvelle carte est " + card + " et votre score est de " + score);
-            } else {
+            } else if (choicePlayer.equals("non")) {
                 continuer = false;
                 System.out.println("Au tour de Michel :");
+            } else {
+                System.out.println("Valeur incorrecte. Veuillez réessayer");
             }
         }
         if (score > 21) {
@@ -60,14 +62,15 @@ class Play {
 
         int card2Dealer = takeCard();
         scoreDealer = scoreDealer + card2Dealer;
-        System.out.println("La deuxième carte de Michel est révélée, sa carte est " + card2Dealer + ". Son score est donc de " + scoreDealer);
+        System.out.println("La deuxième carte de Michel est révélée, sa carte est un " + card2Dealer + ". Son score est donc de " + scoreDealer);
         while (scoreDealer <= 16) {
             int newCardDealer = takeCard();
             scoreDealer = scoreDealer + newCardDealer;
-            System.out.println("La nouvelle carte de Michel est " + newCardDealer + " et son score est de " + scoreDealer);
+            System.out.println("La nouvelle carte de Michel est un " + newCardDealer + " et son score est de " + scoreDealer);
             if (newCardDealer == 1) {
                 if (((scoreDealer + 11) >= 17) && ((scoreDealer + 11) <= 21)) {
                     scoreDealer = scoreDealer + 11;
+                    System.out.println("L'As de Michel vaut 11, son score est donc de " + scoreDealer);
                 } else {
                     scoreDealer = scoreDealer + 1;
                 }
