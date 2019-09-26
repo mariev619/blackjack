@@ -69,7 +69,7 @@ class Play {
             System.out.println("La nouvelle carte de Michel est un " + newCardDealer + " et son score est de " + scoreDealer);
             if (newCardDealer == 1) {
                 if (((scoreDealer + 11) >= 17) && ((scoreDealer + 11) <= 21)) {
-                    scoreDealer = scoreDealer + 11;
+                    scoreDealer = scoreDealer + 11 - 1;
                     System.out.println("L'As de Michel vaut 11, son score est donc de " + scoreDealer);
                 } else {
                     scoreDealer = scoreDealer + 1;
